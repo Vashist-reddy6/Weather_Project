@@ -1,0 +1,22 @@
+{
+  "model_type": "LSTM",
+  "seq_len": 24,
+  "features": [
+    "temperature",
+    "humidity",
+    "pressure",
+    "wind_speed",
+    "cloud_cover",
+    "rainfall_1h"
+  ],
+  "num_classes": 4,
+  "risk_names": {
+    "0": "LOW",
+    "1": "MODERATE",
+    "2": "HIGH",
+    "3": "CRITICAL"
+  },
+  "test_accuracy": 0.999,
+  "epochs_ran": 9,
+  "framework": "TensorFlow 2.18.0"
+}

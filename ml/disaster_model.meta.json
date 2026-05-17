@@ -1,0 +1,16 @@
+{
+  "trained_at": "2026-05-10T18:46:15.002859Z",
+  "training_rows": 1244,
+  "test_rows": 311,
+  "test_accuracy": 0.9968,
+  "features": [
+    "temperature",
+    "humidity",
+    "pressure",
+    "wind_speed",
+    "cloud_cover",
+    "rainfall_1h"
+  ],
+  "n_estimators": 250,
+  "interval_days": 7
+}

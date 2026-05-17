@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherGuard — Offline Emergency Guide</title>
+  <meta name="description" content="WeatherGuard AI offline emergency guide — works on 2G and feature phones.">
+  <style>
+    /* Minimal CSS — target under 5KB total page weight for 2G compatibility */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #0a0b0e; color: #e0e0e0; font-size: 15px; line-height: 1.5; }
+    header { background: #0d1117; border-bottom: 2px solid #00c8d4; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+    header h1 { font-size: 1.1rem; color: #00f0ff; }
+    header span { font-size: 0.7rem; color: #888; margin-top: 2px; display: block; }
+    .offline-badge { background: #1a2a1a; color: #4caf50; border: 1px solid #4caf50; border-radius: 20px; font-size: 0.65rem; padding: 2px 10px; }
+    main { max-width: 640px; margin: 0 auto; padding: 16px; }
+    h2 { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin: 20px 0 8px; border-top: 1px solid #1c1c1c; padding-top: 12px; }
+    .section { background: #111318; border: 1px solid #1e2128; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .section-title { font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    ol, ul { padding-left: 20px; }
+    li { margin-bottom: 5px; font-size: 0.85rem; color: #ccc; }
+    .contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .contact-card { background: #0d1117; border: 1px solid #1e2128; border-radius: 6px; padding: 10px; text-align: center; text-decoration: none; display: block; }
+    .contact-card .num { font-size: 1.4rem; font-weight: bold; color: #ef4444; font-family: monospace; }
+    .contact-card .lbl { font-size: 0.62rem; color: #888; margin-top: 2px; }
+    .sms-box { background: #0d1a1a; border: 1px solid #00c8d420; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .sms-box strong { color: #00f0ff; }
+    .sms-example { font-family: monospace; background: #0a1010; border: 1px solid #00c8d415; border-radius: 4px; padding: 6px 10px; color: #00f0ff; margin-top: 6px; font-size: 0.85rem; display: block; }
+    .risk-LOW      { color: #22c55e; }
+    .risk-MODERATE { color: #eab308; }
+    .risk-HIGH     { color: #f97316; }
+    .risk-CRITICAL { color: #ef4444; }
+    .badge { display: inline-block; border-radius: 20px; padding: 2px 10px; font-size: 0.7rem; font-weight: bold; margin-right: 6px; }
+    .badge-low      { background: #0d2a1a; color: #22c55e; border: 1px solid #22c55e40; }
+    .badge-moderate { background: #1a1a00; color: #eab308; border: 1px solid #eab30840; }
+    .badge-high     { background: #1a0d00; color: #f97316; border: 1px solid #f9731640; }
+    .badge-critical { background: #1a0000; color: #ef4444; border: 1px solid #ef444440; }
+    footer { text-align: center; padding: 20px; font-size: 0.65rem; color: #444; border-top: 1px solid #1c1c1c; margin-top: 12px; }
+    a { color: #00c8d4; }
+    @media (max-width: 420px) { .contacts { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>⛈ WeatherGuard AI</h1>
+      <span>Offline Emergency Guide — works on 2G &amp; feature phones</span>
+    </div>
+    <div style="margin-left:auto">
+      <div class="offline-badge">✓ OFFLINE</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SMS Bot -->
+    <div class="sms-box">
+      <strong>📱 SMS Mode — No Internet Required</strong>
+      <p style="font-size:0.82rem;color:#aaa;margin-top:6px;">Text any keyword to the WeatherGuard number:</p>
+      <code class="sms-example">RISK HYDERABAD</code>
+      <code class="sms-example">RISK CHENNAI</code>
+      <code class="sms-example">HELP</code>
+      <p style="font-size:0.72rem;color:#666;margin-top:6px;">You'll receive current risk level + nearest shelter address by SMS.</p>
+    </div>
+
+    <!-- Risk Levels -->
+    <h2>Risk Level Reference</h2>
+    <div class="section">
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;border-bottom:1px solid #1c1c1c;"><span class="badge badge-low">LOW</span> — Normal conditions. Regular precautions apply.</li>
+        <li style="padding:6px 0;border-bottom:1px solid #1c1c1c;"><span class="badge badge-moderate">MODERATE</span> — Elevated risk. Stay alert, prepare supplies.</li>
+        <li style="padding:6px 0;border-bottom:1px solid #1c1c1c;"><span class="badge badge-high">HIGH</span> — Stay indoors. Avoid travel. Monitor NDMA.</li>
+        <li style="padding:6px 0;"><span class="badge badge-critical">CRITICAL</span> — Evacuate immediately. Move to shelter. Call 112.</li>
+      </ul>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <h2>Emergency Contacts (India)</h2>
+    <div class="contacts" style="margin-bottom:12px;">
+      <a href="tel:112" class="contact-card"><div class="num">112</div><div class="lbl">India Emergency</div></a>
+      <a href="tel:108" class="contact-card"><div class="num">108</div><div class="lbl">Ambulance</div></a>
+      <a href="tel:1078" class="contact-card"><div class="num">1078</div><div class="lbl">NDMA Helpline</div></a>
+      <a href="tel:1070" class="contact-card"><div class="num">1070</div><div class="lbl">Disaster Helpline</div></a>
+      <a href="tel:100" class="contact-card"><div class="num">100</div><div class="lbl">Police</div></a>
+      <a href="tel:101" class="contact-card"><div class="num">101</div><div class="lbl">Fire Brigade</div></a>
+    </div>
+
+    <!-- Flood -->
+    <h2>🌊 Flood Emergency</h2>
+    <div class="section">
+      <div class="section-title" style="color:#3b82f6;">Flood Safety Steps</div>
+      <ol>
+        <li>Move immediately to higher ground — do not wait.</li>
+        <li>Avoid walking in water over 15cm — it can knock you over.</li>
+        <li>Disconnect all electrical appliances.</li>
+        <li>Follow evacuation orders from local authorities.</li>
+        <li>Do NOT drive through flooded roads.</li>
+        <li>Store 3L water/person/day, food, torch, medicines.</li>
+      </ol>
+      <p style="margin-top:8px;font-size:0.78rem;color:#888;">Safe zones: School upper floors · Community halls · High-ground structures</p>
+    </div>
+
+    <!-- Cyclone -->
+    <h2>🌀 Cyclone / Storm</h2>
+    <div class="section">
+      <div class="section-title" style="color:#8b5cf6;">Cyclone Safety Steps</div>
+      <ol>
+        <li>Stay indoors, away from windows and glass doors.</li>
+        <li>Move to the innermost room on the lowest floor.</li>
+        <li>Do NOT go outside during the eye — winds will return.</li>
+        <li>Secure all outdoor items before the storm hits.</li>
+        <li>Charge devices and fill water containers before power cuts.</li>
+        <li>Monitor NDMA: <strong>ndma.gov.in</strong> or local radio.</li>
+      </ol>
+    </div>
+
+    <!-- Heatwave -->
+    <h2>☀️ Heatwave</h2>
+    <div class="section">
+      <div class="section-title" style="color:#f97316;">Heatwave Safety</div>
+      <ol>
+        <li>Stay indoors 12 PM – 4 PM (peak heat).</li>
+        <li>Drink water every 20 minutes.</li>
+        <li>Wear loose, light-colored cotton clothing.</li>
+        <li>Never leave children/elderly in parked vehicles.</li>
+        <li>Heat stroke signs: hot skin + confusion → call 108.</li>
+      </ol>
+    </div>
+
+    <!-- Thunderstorm -->
+    <h2>⛈ Thunderstorm</h2>
+    <div class="section">
+      <div class="section-title" style="color:#eab308;">Thunderstorm Safety</div>
+      <ol>
+        <li>Seek shelter in a solid building or hard-topped vehicle.</li>
+        <li>Avoid open fields, hilltops, and isolated trees.</li>
+        <li>Stay away from metal structures.</li>
+        <li>Wait 30 minutes after the last thunder before going outside.</li>
+      </ol>
+    </div>
+
+    <!-- Nearby Resources (static) -->
+    <h2>📍 Key Shelter Numbers (Telangana / AP)</h2>
+    <div class="section">
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:5px 0;border-bottom:1px solid #1c1c1c;"><strong>Gandhi Nagar Community Hall (Hyderabad)</strong> — <a href="tel:04023456789">040-23456789</a></li>
+        <li style="padding:5px 0;border-bottom:1px solid #1c1c1c;"><strong>Vijayawada Cyclone Shelter</strong> — <a href="tel:08662973600">0866-2973600</a></li>
+        <li style="padding:5px 0;border-bottom:1px solid #1c1c1c;"><strong>Warangal Relief Camp</strong> — <a href="tel:08702461234">0870-2461234</a></li>
+        <li style="padding:5px 0;"><strong>Visakhapatnam Cyclone Shelter</strong> — <a href="tel:08912563333">0891-2563333</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    WeatherGuard AI — Cached by Service Worker · Works offline · Data as of <span id="date"></span><br>
+    For live risk: <a href="/">Open WeatherGuard App</a> (requires internet)
+  </footer>
+  <script>document.getElementById('date').textContent = new Date().toLocaleDateString();</script>
+</body>
+</html>
